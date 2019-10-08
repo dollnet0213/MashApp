@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MuscleApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+　　　<body>
+  <header>
+    <div class="header-logo">
+      <li>
+      <%= link_to("Mashapp","/") %>
+      </li>
+    </div>
+    <ul class="header-menus">
+    <% if @current_user %>
+    　<li>
+      <%= link_to("#{@current_user.name}","/users/#{session[:user_id]}") %>
+      </li>
+      <li>
+      <%= link_to("新規投稿","/post/new")%>
+      </li>
+      <li>
+      <%= link_to("みんなの投稿","/post/index")%>
+      </li>
+      <li>
+      <%= link_to("ログアウト","/logout",{method: :post}) %>
+      </li>
+      <% else %>
+      <li>
+      <%= link_to("サービスについて","/about")%>
+      </li>
+      <li>
+      <%= link_to("新規登録","/signup")%>
+      </li>
+      <li>
+      <%=link_to("ログイン","/login")%>
+      </li>
+       <% end %>
+    </ul>
+  </header>
+  <% if flash[:notice] %>
+    <div class="flash">
+      <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
